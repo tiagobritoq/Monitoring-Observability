@@ -60,30 +60,7 @@ services:
     depends_on:
       - zabbix-server
     networks:
-      - zbxnet
-  
-  zabbix-agent-mysql:
-    image: zabbix/zabbix-agent2:alpine-6.0-latest
-    container_name: zabbix-agent-mysql
-    restart: unless-stopped
-    environment:
-      ZBX_SERVER_HOST: srvzabbix
-      ZBX_HOSTNAME: dbzabbix-mysql
-    volumes:
-      - ./mysql.conf:/etc/zabbix/zabbix_agent2.d/plugins.d/
-    depends_on:
-      - mysql  
-    networks:
-      - zbxnet
-    
-  adminer:
-    image: adminer
-    container_name: adminer
-    restart: unless-stopped
-    ports:
-      - "8081:8080"
-    networks:
-      - zbxnet        
+      - zbxnet      
 
 networks:
   zbxnet:
