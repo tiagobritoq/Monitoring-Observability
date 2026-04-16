@@ -6,7 +6,7 @@ Repositório dedicado a estudos e práticas de **monitoramento, observabilidade 
 
 ```
 Monitoring-Observability/
-├── zabbixserver-lab/     # Ambiente Zabbix com Docker/Vagrant (em construção)
+├── zabbixserver-lab/     # Ambiente Zabbix com Docker (utilizando docker-compose)
 ├── zabbix-reports/       # Scripts de relatórios via API Zabbix
 └── .github/workflows/    # Pipelines CI/CD
 ```
@@ -19,7 +19,7 @@ Monitoring-Observability/
 
 Laboratório para provisionamento de ambiente Zabbix.
 
-* Docker / Vagrant
+* Docker
 * Simulação de ambiente real
 * Monitoramento de hosts e serviços
 
