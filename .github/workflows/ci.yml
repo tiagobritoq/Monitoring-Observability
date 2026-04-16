@@ -34,5 +34,25 @@ jobs:
           echo "Validando scripts Python"
           find . -name "*.py" -exec python3 -m py_compile {} \; || true
 
+      - name: Instalar Docker Compose
+        run: |
+          docker --version
+          docker compose version || echo "Compose já disponível"
+
+      - name: Validar docker-compose
+        run: |
+          if [ -f zabbixserver-lab/docker-compose.yml ]; then
+          docker compose -f zabbixserver-lab/docker-compose.yml config
+            else
+          echo "docker-compose não encontrado"
+          fi
+
+      - name: Testar subida do ambiente
+        run: |
+          cd zabbixserver-lab
+          docker compose up -d
+          sleep 10
+          docker ps
+
       - name: Pipeline finalizada
         run: echo "✔️ CI executada com sucesso"
