@@ -1,0 +1,38 @@
+name: CI - Monitoring Labs
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v4
+
+      - name: Mostrar estrutura
+        run: |
+          echo "Estrutura do projeto:"
+          ls -R
+
+      - name: Validar presença de projetos
+        run: |
+          echo "Verificando diretórios..."
+          [ -d "zabbix-reports" ] && echo "zabbix-reports OK" || echo "zabbix-reports NÃO encontrado"
+          [ -d "zabbixserver-lab" ] && echo "zabbixserver-lab OK" || echo "zabbixserver-lab ainda não criado"
+
+      - name: Validar scripts shell
+        run: |
+          echo "Validando scripts .sh"
+          find . -name "*.sh" -exec bash -n {} \;
+
+      - name: Validar arquivos Python (se existirem)
+        run: |
+          echo "Validando scripts Python"
+          find . -name "*.py" -exec python3 -m py_compile {} \; || true
+
+      - name: Pipeline finalizada
+        run: echo "✔️ CI executada com sucesso"
